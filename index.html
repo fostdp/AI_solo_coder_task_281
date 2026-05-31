@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公交路线优化沙盘</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚌 公交路线优化沙盘</h1>
+            <div class="header-controls">
+                <button id="saveBtn">💾 保存方案</button>
+                <button id="loadBtn">📂 加载方案</button>
+                <button id="compareBtn">📊 方案对比</button>
+                <button id="reportBtn">📈 分析报告</button>
+                <button id="resetBtn">🔄 重置</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="panel">
+                    <h3>🚇 交通模式</h3>
+                    <div class="mode-buttons">
+                        <button class="transit-mode-btn active" data-mode="bus">🚌 公交</button>
+                        <button class="transit-mode-btn" data-mode="metro">🚇 地铁</button>
+                        <button class="transit-mode-btn" data-mode="lightRail">🚈 轻轨</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>🎯 建筑放置</h3>
+                    <div class="tool-buttons">
+                        <button class="tool-btn active" data-tool="residential">🏠 居民区</button>
+                        <button class="tool-btn" data-tool="commercial">🏢 商业区</button>
+                        <button class="tool-btn" data-tool="stop">🚏 站点</button>
+                        <button class="tool-btn" data-tool="route">🛣️ 画线路</button>
+                        <button class="tool-btn" data-tool="delete">🗑️ 删除</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>⚙️ 模拟控制</h3>
+                    <div class="sim-controls">
+                        <button id="startSim">▶️ 开始模拟</button>
+                        <button id="stopSim">⏹️ 停止模拟</button>
+                        <div class="speed-control">
+                            <label>速度:</label>
+                            <input type="range" id="speedSlider" min="1" max="5" value="2">
+                            <span id="speedValue">2x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>📊 实时数据</h3>
+                    <div class="metrics">
+                        <div class="metric">
+                            <span class="label">等待时间:</span>
+                            <span id="waitTime" class="value">0s</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">满载率:</span>
+                            <span id="loadRate" class="value">0%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">覆盖率:</span>
+                            <span id="coverage" class="value">0%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">运营成本:</span>
+                            <span id="cost" class="value">¥0</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">乘客数:</span>
+                            <span id="passengers" class="value">0</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">当前人口:</span>
+                            <span id="population" class="value">0</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">拥堵指数:</span>
+                            <span id="congestion" class="value">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>ℹ️ 说明</h3>
+                    <div class="instructions">
+                        <p>• 先放置居民区和商业区</p>
+                        <p>• 选择交通模式后放置站点</p>
+                        <p>• 画线路连接同类型的站点</p>
+                        <p>• 交通便利会促进人口增长</p>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="game-area">
+                <canvas id="gameCanvas"></canvas>
+                <div class="info-overlay" id="infoOverlay"></div>
+            </main>
+        </div>
+    </div>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modalTitle">保存方案</h3>
+            <input type="text" id="schemeName" placeholder="方案名称">
+            <div id="schemeList" class="scheme-list"></div>
+            <div id="compareContent" class="compare-content"></div>
+            <div id="reportContent" class="report-content"></div>
+            <div class="modal-buttons">
+                <button id="modalConfirm">确定</button>
+                <button id="modalCancel">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
